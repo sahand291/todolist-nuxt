@@ -166,7 +166,6 @@ export default Vue.extend({
       })
       return todoLists
     },
-
   },
 
   watch: {

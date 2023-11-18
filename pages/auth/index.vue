@@ -1,7 +1,7 @@
 <template>
   <Cart>
     <form @submit.prevent="onSubmit()" class="auth-form">
-      <h1>{{ isSigninMode ? 'Login' : 'Signup' }}</h1>
+      <h1 class="form-title">{{ isSigninMode ? 'Login' : 'Signup' }}</h1>
       <div class="input-section">
         <label for="username">
           Username
@@ -36,7 +36,7 @@
           @focusout="validatePassword"
         />
       </div>
-      <button class="btn" type="submit">
+      <button class="login-btn" type="submit">
         {{ isSigninMode ? 'Login' : 'Signup' }}
       </button>
       <a type="button" @click="switchMode"
@@ -48,6 +48,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+
 import Cart from '~/components/UI/Cart.vue'
 import cookie from 'js-cookie'
 
@@ -97,19 +98,11 @@ export default Vue.extend({
     },
 
     validateUsername() {
-      if (this.enteredUsername.trim().length === 0) {
-        this.usernameValidation = false
-      } else {
-        this.usernameValidation = true
-      }
+      this.usernameValidation = this.enteredUsername.trim().length !== 0
     },
 
     validatePassword() {
-      if (this.enteredPassword.trim().length === 0) {
-        this.passwordValidation = false
-      } else {
-        this.passwordValidation = true
-      }
+      this.passwordValidation = this.enteredPassword.trim().length !== 0
     },
   },
 })

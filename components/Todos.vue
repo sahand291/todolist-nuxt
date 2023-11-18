@@ -29,13 +29,16 @@ export default defineComponent({
     },
   },
   methods: {
-    onSaveTodo(newTodo: Todo) {
-      this.$emit("save-todo", newTodo)
+    printHello() {
+      return 'hello'
     },
-    onDeleteTodo(id: string) {      
+    onSaveTodo(newTodo: Todo) {
+      this.printHello()
+      this.$emit('save-todo', newTodo)
+    },
+    onDeleteTodo(id: string) {
       this.$emit('delete-todo', id)
-    }
-  }
-
+    },
+  },
 })
 </script>

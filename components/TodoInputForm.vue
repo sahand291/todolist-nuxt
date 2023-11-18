@@ -36,7 +36,7 @@ export default defineComponent({
     return {
       title: '',
       description: '',
-      isFormEmpty: false
+      isFormEmpty: false,
     }
   },
   methods: {

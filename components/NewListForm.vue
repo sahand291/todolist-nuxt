@@ -92,7 +92,6 @@ export default defineComponent({
   outline: #339af0 solid 2px;
 }
 .error-msg {
-  
   color: #f03e3e;
   font-size: 12px;
 }

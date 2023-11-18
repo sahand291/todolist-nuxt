@@ -6,7 +6,7 @@
     </div>
     <div class="controls">
       <button @click="editMode()" class="btn btn-edit">
-       <EditIcon/>
+        <EditIcon />
       </button>
       <button @click="deleteTodo(todoId)" class="btn btn-delete">
         <DeleteIcon />
@@ -33,7 +33,7 @@
     </div>
     <div class="controls">
       <button @click="saveTodo(todoId)" class="btn btn-edit">
-        <SaveIcon/>
+        <SaveIcon />
       </button>
       <button @click="deleteTodo(todoId)" class="btn btn-delete">
         <DeleteIcon />
@@ -46,7 +46,6 @@
 import Vue from 'vue'
 import { Todo } from '~/types'
 
-
 import DeleteIcon from '~/components/UI/icons/DeleteIcon.vue'
 import EditIcon from '~/components/UI/icons/EditIcon.vue'
 import SaveIcon from './UI/icons/SaveIcon.vue'
@@ -55,8 +54,8 @@ export default Vue.extend({
   components: {
     DeleteIcon,
     EditIcon,
-    SaveIcon
-},
+    SaveIcon,
+  },
   props: {
     todoTitle: {
       type: String,
@@ -131,8 +130,6 @@ export default Vue.extend({
 .btn-edit {
   background-color: #1c7ed6;
 }
-
-
 
 .input {
   height: 40px;
