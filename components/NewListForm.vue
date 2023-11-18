@@ -51,7 +51,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .new-list-section {
   margin: 10px;
 }
@@ -83,14 +83,15 @@ export default defineComponent({
   border-radius: 5px;
   font-size: 16px;
   padding: 0 15px;
+  &:focus {
+    outline: #339af0 solid 2px;
+  }
 }
 
 .input-error {
   border: 2px solid #f03e3e;
 }
-.input:focus {
-  outline: #339af0 solid 2px;
-}
+
 .error-msg {
   color: #f03e3e;
   font-size: 12px;

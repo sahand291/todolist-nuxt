@@ -103,7 +103,7 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -111,27 +111,30 @@ export default Vue.extend({
   padding: 20px 50px;
   width: 400px;
   margin: 0 auto;
+  a {
+    color: #1c7ed6;
+    text-decoration: underline;
+    align-self: center;
+  }
 }
 
 .input-section {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  label {
+    padding-left: 15px;
+  }
 }
-
-.input-section label {
-  padding-left: 15px;
-}
-
 .input {
   height: 40px;
   border: 2px solid #1c7ed6;
   border-radius: 5px;
   font-size: 16px;
   padding: 0 15px;
-}
-.input:focus {
-  outline: #339af0 solid 2px;
+  &:focus {
+    outline: #339af0 solid 2px;
+  }
 }
 .btn {
   padding: 10px 20px;
@@ -141,12 +144,6 @@ export default Vue.extend({
   font-weight: 700;
   font-size: 20px;
   color: #ffffff;
-}
-
-form a {
-  color: #1c7ed6;
-  text-decoration: underline;
-  align-self: center;
 }
 
 .error {
