@@ -1,22 +1,38 @@
 <template>
   <section class="new-list-section">
-    <Cart class="new-list-form">
-      <button v-if="!addListMode" class="btn" @click="showAddListForm">
-        Add new list
-      </button>
-      <form @submit.prevent="addNewList" v-if="addListMode" class="form">
-        <input
-          class="input"
-          :class="isError && 'input-error'"
-          v-model="listTitle"
-          type="text"
-          name="new-list"
-          id="new-list"
-        />
-        <button type="submit" class="btn">Add</button>
-      </form>
-      <span v-if="isError" class="error-msg">please enter valid list name</span>
-    </Cart>
+    <v-container>
+      <v-card class="new-list-form">
+        <v-btn
+          class="white--text blue darken-2"
+          v-if="!addListMode"
+          @click="showAddListForm"
+        >
+          Add new list
+        </v-btn>
+        <v-from @submit.prevent="addNewList" v-if="addListMode" class="form">
+          <v-container>
+            <v-row>
+              <v-text-field
+                :class="isError && 'input-error'"
+                v-model="listTitle"
+                type="text"
+                name="new-list"
+                id="new-list"
+              />
+
+              <v-col align-self="center">
+                <v-btn type="submit" class="white--text blue darken-2"
+                  >Add</v-btn
+                >
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-from>
+        <span v-if="isError" class="error-msg"
+          >please enter valid list name</span
+        >
+      </v-card>
+    </v-container>
   </section>
 </template>
 
@@ -53,7 +69,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .new-list-section {
-  margin: 10px;
+  margin-bottom: 20px;
 }
 .new-list-form {
   padding: 20px;

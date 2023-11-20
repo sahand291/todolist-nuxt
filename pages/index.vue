@@ -1,7 +1,7 @@
 <template>
   <section class="todo-list-section">
     <NewListForm @add-list="onAddList" />
-    <Cart class="center">
+    <v-card class="center">
       <TodoListControl @change="onSelectList" :todoLists="todoListTitles" />
       <Todos
         v-if="isListSelected && !isListEmpty"
@@ -14,7 +14,8 @@
       </p>
       <p v-else-if="isListEmpty" class="message">List is empty, add new todo</p>
       <TodoInputForm @add-todo="onAddTodo" />
-    </Cart>
+
+    </v-card>
   </section>
 </template>
 
@@ -176,6 +177,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+
 .message {
   text-align: center;
   font-weight: 700;

@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
-    <Header />
-    <Nuxt />
-  </div>
+  <v-app class="grey lighten-4">
+    <div class="container">
+      <Header />
+      <Nuxt />
+    </div>
+  </v-app>
 </template>
 
 <script lang="ts">

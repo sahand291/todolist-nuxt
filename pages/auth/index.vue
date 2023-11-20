@@ -1,49 +1,51 @@
 <template>
-  <Cart>
-    <form @submit.prevent="onSubmit()" class="auth-form">
-      <h1 class="form-title">{{ isSigninMode ? 'Login' : 'Signup' }}</h1>
-      <div class="input-section">
-        <label for="username">
-          Username
-          <span class="error">{{
-            usernameValidation ? '' : '(please enter valid username)'
-          }}</span></label
+  <v-container>
+    <v-card class="form-container">
+      <v-form @submit.prevent="onSubmit()" class="form">
+        <h1 class="form-title">{{ isSigninMode ? 'Login' : 'Signup' }}</h1>
+        <div class="input-section">
+          <label for="username">
+            Username
+            <span class="error">{{
+              usernameValidation ? '' : '(please enter valid username)'
+            }}</span></label
+          >
+          <input
+            class="input"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Sahand"
+            v-model="enteredUsername"
+            @focusout="validateUsername"
+          />
+        </div>
+        <div class="input-section">
+          <label for="password"
+            >Password
+            <span class="error">{{
+              passwordValidation ? '' : '(please enter valid password)'
+            }}</span></label
+          >
+          <input
+            class="input"
+            type="password"
+            name="password"
+            placeholder="password"
+            id="password"
+            v-model="enteredPassword"
+            @focusout="validatePassword"
+          />
+        </div>
+        <v-btn class="blue darken-2 white--text" type="submit">
+          {{ isSigninMode ? 'Login' : 'Signup' }}
+        </v-btn>
+        <a type="button" @click="switchMode"
+          >Switch to {{ isSigninMode ? 'Signup' : 'Login' }}</a
         >
-        <input
-          class="input"
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Sahand"
-          v-model="enteredUsername"
-          @focusout="validateUsername"
-        />
-      </div>
-      <div class="input-section">
-        <label for="password"
-          >Password
-          <span class="error">{{
-            passwordValidation ? '' : '(please enter valid password)'
-          }}</span></label
-        >
-        <input
-          class="input"
-          type="password"
-          name="password"
-          placeholder="password"
-          id="password"
-          v-model="enteredPassword"
-          @focusout="validatePassword"
-        />
-      </div>
-      <button class="login-btn" type="submit">
-        {{ isSigninMode ? 'Login' : 'Signup' }}
-      </button>
-      <a type="button" @click="switchMode"
-        >Switch to {{ isSigninMode ? 'Signup' : 'Login' }}</a
-      >
-    </form>
-  </Cart>
+      </v-form>
+    </v-card>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -104,17 +106,19 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px 50px;
+.form-container {
   width: 400px;
   margin: 0 auto;
-  a {
-    color: #1c7ed6;
-    text-decoration: underline;
-    align-self: center;
+  .form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    gap: 20px;
+    a {
+      color: #1c7ed6;
+      text-decoration: underline;
+      align-self: center;
+    }
   }
 }
 
