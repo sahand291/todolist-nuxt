@@ -3,6 +3,7 @@
     <v-container>
       <v-card class="new-list-form">
         <v-btn
+        color="btn"
           class="white--text blue darken-2"
           v-if="!addListMode"
           @click="showAddListForm"

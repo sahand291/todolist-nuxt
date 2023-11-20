@@ -22,7 +22,7 @@
             />
           </v-col>
           <v-col align-self="center">
-            <v-btn type="submit" class="btn blue darken-2" >
+            <v-btn type="submit" class="btn blue darken-2" :disabled="!disableForm">
               <v-icon>mdi-plus</v-icon>
             </v-btn>
           </v-col>
@@ -40,6 +40,11 @@ import { defineComponent, PropType } from 'vue'
 import AddIcon from './UI/icons/AddIcon.vue'
 
 export default defineComponent({
+  props: {
+    disableForm: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       title: '',

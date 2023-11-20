@@ -13,7 +13,7 @@
         please select a todo list
       </p>
       <p v-else-if="isListEmpty" class="message">List is empty, add new todo</p>
-      <TodoInputForm @add-todo="onAddTodo" />
+      <TodoInputForm @add-todo="onAddTodo" :disableForm="isListSelected"/>
 
     </v-card>
   </section>

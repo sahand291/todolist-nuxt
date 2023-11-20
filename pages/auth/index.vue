@@ -6,9 +6,9 @@
         <div class="input-section">
           <label for="username">
             Username
-            <span class="error">{{
-              usernameValidation ? '' : '(please enter valid username)'
-            }}</span></label
+            <span v-if="!usernameValidation" class="error">
+              please enter valid username
+            </span></label
           >
           <input
             class="input"
@@ -23,9 +23,9 @@
         <div class="input-section">
           <label for="password"
             >Password
-            <span class="error">{{
-              passwordValidation ? '' : '(please enter valid password)'
-            }}</span></label
+            <span v-if="!usernameValidation" class="error">
+              please enter valid username
+            </span></label
           >
           <input
             class="input"
@@ -54,7 +54,6 @@ import Vue from 'vue'
 import cookie from 'js-cookie'
 
 export default Vue.extend({
-
   data() {
     return {
       enteredUsername: '',
