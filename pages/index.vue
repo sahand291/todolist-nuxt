@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import Cart from '~/components/UI/Cart.vue'
+
 import Todos from '~/components/Todos.vue'
 import NewListForm from '~/components/NewListForm.vue'
 import TodoInputForm from '~/components/TodoInputForm.vue'
@@ -36,7 +36,7 @@ export default Vue.extend({
   components: {
     NewListForm,
     TodoInputForm,
-    Cart,
+
     TodoListControl,
     Todos,
   },

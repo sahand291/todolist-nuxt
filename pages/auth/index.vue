@@ -51,11 +51,10 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import Cart from '~/components/UI/Cart.vue'
 import cookie from 'js-cookie'
 
 export default Vue.extend({
-  components: { Cart },
+
   data() {
     return {
       enteredUsername: '',

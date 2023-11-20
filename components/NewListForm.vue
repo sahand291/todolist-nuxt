@@ -39,10 +39,8 @@
 <script>
 import { defineComponent } from 'vue'
 
-import Cart from './UI/Cart.vue'
-
 export default defineComponent({
-  components: { Cart },
+
   data() {
     return {
       listTitle: '',
