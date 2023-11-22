@@ -2,11 +2,13 @@
   <header>
     <v-card class="header">
       <h1>Todo list</h1>
-      <v-btn class="blue darken-2" @click="changeTheme">dark mode</v-btn>
-      <button v-if="showLoginBtn" class="btn" @click="signout">
-        <span> Logout </span>
-        <LogoutIcon />
-      </button>
+      <div>
+        <v-btn class="blue darken-2" @click="changeTheme">dark mode</v-btn>
+        <v-btn v-if="showLoginBtn" class="red darken-1  " @click="signout">
+          <v-icon left>mdi-logout</v-icon>
+          <span> Logout </span>
+        </v-btn>
+      </div>
     </v-card>
   </header>
 </template>
@@ -37,7 +39,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="scss" scoped>
 .header {
   display: flex;
   justify-content: space-between;
@@ -45,22 +47,5 @@ export default defineComponent({
   padding: 32px;
   margin: 20px 0;
 }
-.icon {
-  width: 24px;
-  color: #fff;
-}
 
-.btn {
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  height: 40px;
-
-  border: none;
-  color: #fff;
-  background-color: #f03e3e;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 700;
-}
 </style>
