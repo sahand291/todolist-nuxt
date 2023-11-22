@@ -42,6 +42,15 @@ class TodoApi{
       })
     }
 
+    deleteList(listId: string) {
+      const repositoryApi = new Api(`todolist`)
+      return repositoryApi.delete(listId, {
+        headers: {
+          Authorization: `Bearer ${this.ctx.store.getters.getToken}`,
+        },
+      })
+    }
+
     editTodo(id: string, todo: { title: string; description: string }) {
       const repositoryApi = new Api(`todolist/updateTodo`)
 

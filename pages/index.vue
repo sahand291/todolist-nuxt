@@ -1,8 +1,12 @@
 <template>
   <section class="todo-list-section">
-
     <v-card class="center todo-list">
-      <TodoListControl @change="onSelectList" @add-list="onAddList" :todoLists="todoListTitles" />
+      <TodoListControl
+        @change="onSelectList"
+        @add-list="onAddList"
+        @delete-list="onDeleteList"
+        :todoLists="todoListTitles"
+      />
       <Todos
         v-if="isListSelected && !isListEmpty"
         :todos="todos"
@@ -13,8 +17,7 @@
         please select a todo list
       </p>
       <p v-else-if="isListEmpty" class="message">List is empty, add new todo</p>
-      <TodoInputForm @add-todo="onAddTodo" :disableForm="isListSelected"/>
-
+      <TodoInputForm @add-todo="onAddTodo" :disableForm="isListSelected" />
     </v-card>
   </section>
 </template>
@@ -22,9 +25,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-
 import Todos from '~/components/Todos.vue'
-
 import TodoInputForm from '~/components/TodoInputForm.vue'
 import TodoListControl from '~/components/TodoListControl.vue'
 
@@ -34,9 +35,7 @@ export default Vue.extend({
   layout: 'default',
   middleware: ['check-auth', 'auth'],
   components: {
-
     TodoInputForm,
-
     TodoListControl,
     Todos,
   },
@@ -59,12 +58,14 @@ export default Vue.extend({
         this.isListSelected = false
       }
     },
+
     //Finds index of a todo list with given id
     getTodoListIndex(listId: string): number {
       return this.todoListsData.findIndex(
         (todoList: TodoList) => todoList.listId === listId
       )
     },
+
     //replaces edited todo with old one in the state
     replaceTodo(listId: string, updatedTodo: Todo): void {
       const listIndex: number = this.getTodoListIndex(listId)
@@ -73,11 +74,13 @@ export default Vue.extend({
       )
       this.todoListsData[listIndex].todos.splice(todoIndex, 1, updatedTodo)
     },
+
     //updates todos array in state with new todo list selected by user
     onSelectList(listId: string): void {
       this.selectedListId = listId
       this.selectTodos(listId)
     },
+
     // adds new todo to  a todolist with specific id (with api request and saving in the state)
     async onAddTodo(todoData: { title: string; description: string }) {
       this.isListEmpty = false
@@ -93,8 +96,9 @@ export default Vue.extend({
       }
       this.todoListsData[currentListIndex].todos.push(newTodo)
     },
+
     //add new list to database(api request)
-    async onAddList(newListTitle: string) {      
+    async onAddList(newListTitle: string) {
       const res = await this.$todoApi.addList({ listTitle: newListTitle })
       console.log(res.data.data._id)
 
@@ -125,6 +129,20 @@ export default Vue.extend({
         (todo: Todo) => todo.todoId === todoId
       )
       this.todoListsData[listIndex].todos.splice(todoIndex, 1)
+    },
+
+    async onDeleteList(listId: string) {
+      await this.$todoApi.deleteList(listId)
+
+      const listIndex: number = this.getTodoListIndex(this.selectedListId)
+      // const todoIndex: number = this.todoListsData[listIndex].todos.findIndex(
+      //   (todo: Todo) => todo.todoId === todoId
+      // )
+      console.log(this.todoListsData)
+
+      this.todoListsData.splice(listIndex, 1)
+      this.todos = []
+      this.isListSelected = false
     },
 
     async getAllTodoLists() {

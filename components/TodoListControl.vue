@@ -97,6 +97,8 @@ export default defineComponent({
     },
     deleteTodoList() {
       console.log('delete todo')
+      this.$emit('delete-list', this.selectedListId)
+
     },
   },
   computed: {
