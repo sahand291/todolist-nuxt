@@ -2,6 +2,7 @@
   <header>
     <v-card class="header">
       <h1>Todo list</h1>
+      <v-btn class="blue darken-2" @click="changeTheme">dark mode</v-btn>
       <button v-if="showLoginBtn" class="btn" @click="signout">
         <span> Logout </span>
         <LogoutIcon />
@@ -23,6 +24,9 @@ export default defineComponent({
       cookie.remove('Authorization')
       this.$router.push('/auth')
     },
+    changeTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
   },
   computed: {
     showLoginBtn() {
@@ -40,9 +44,6 @@ export default defineComponent({
   align-items: center;
   padding: 32px;
   margin: 20px 0;
-  /* background-color: #fff; */
-  /* border-radius: 15px; */
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 }
 .icon {
   width: 24px;
