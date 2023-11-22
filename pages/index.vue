@@ -1,8 +1,8 @@
 <template>
   <section class="todo-list-section">
-    <NewListForm @add-list="onAddList" />
+
     <v-card class="center todo-list">
-      <TodoListControl @change="onSelectList" :todoLists="todoListTitles" />
+      <TodoListControl @change="onSelectList" @add-list="onAddList" :todoLists="todoListTitles" />
       <Todos
         v-if="isListSelected && !isListEmpty"
         :todos="todos"
@@ -24,7 +24,7 @@ import Vue from 'vue'
 
 
 import Todos from '~/components/Todos.vue'
-import NewListForm from '~/components/NewListForm.vue'
+
 import TodoInputForm from '~/components/TodoInputForm.vue'
 import TodoListControl from '~/components/TodoListControl.vue'
 
@@ -34,7 +34,7 @@ export default Vue.extend({
   layout: 'default',
   middleware: ['check-auth', 'auth'],
   components: {
-    NewListForm,
+
     TodoInputForm,
 
     TodoListControl,
@@ -94,7 +94,7 @@ export default Vue.extend({
       this.todoListsData[currentListIndex].todos.push(newTodo)
     },
     //add new list to database(api request)
-    async onAddList(newListTitle: string) {
+    async onAddList(newListTitle: string) {      
       const res = await this.$todoApi.addList({ listTitle: newListTitle })
       console.log(res.data.data._id)
 
