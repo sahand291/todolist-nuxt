@@ -1,7 +1,7 @@
 <template>
   <section class="todo-list-section">
     <NewListForm @add-list="onAddList" />
-    <v-card class="center">
+    <v-card class="center todo-list">
       <TodoListControl @change="onSelectList" :todoLists="todoListTitles" />
       <Todos
         v-if="isListSelected && !isListEmpty"
@@ -177,6 +177,9 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.todo-list {
+  overflow: hidden;
+}
 
 .message {
   text-align: center;

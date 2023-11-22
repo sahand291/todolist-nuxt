@@ -1,7 +1,7 @@
 <template>
   <section class="new-list-section">
     <v-container>
-      <v-card class="new-list-form">
+      <v-card class="new-list-form accent">
         <v-btn
         color="btn"
           class="white--text blue darken-2"

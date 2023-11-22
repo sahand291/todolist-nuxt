@@ -1,5 +1,5 @@
 <template>
-  <v-app class="grey lighten-4">
+  <v-app id="app">
     <div class="container">
       <Header />
       <Nuxt />
@@ -16,4 +16,8 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+#app {
+    background-color: var(--v-background-base);
+}
+</style>

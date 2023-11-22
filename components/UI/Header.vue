@@ -1,10 +1,12 @@
 <template>
-  <header class="header">
-    <h1>Todo list</h1>
-    <button v-if="showLoginBtn" class="btn" @click="signout">
-      <span> Logout </span>
-      <LogoutIcon />
-    </button>
+  <header>
+    <v-card class="header">
+      <h1>Todo list</h1>
+      <button v-if="showLoginBtn" class="btn" @click="signout">
+        <span> Logout </span>
+        <LogoutIcon />
+      </button>
+    </v-card>
   </header>
 </template>
 
@@ -37,10 +39,10 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   padding: 32px;
-  margin: 10px 30px 40px 30px;
-  background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+  /* background-color: #fff; */
+  /* border-radius: 15px; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 }
 .icon {
   width: 24px;

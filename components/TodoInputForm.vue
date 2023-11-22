@@ -1,49 +1,55 @@
 <template>
-  <section class="todo-input-section">
-    <v-form form @submit.prevent="addTodo">
+
+    <v-card flat class="new-todo-form accent">
       <v-container>
-        <v-row>
-          <v-col>
-            <v-text-field
-              v-model="title"
-              type="text"
-              name="title"
-              id="title"
-              placeholder="title"
-            />
-          </v-col>
-          <v-col>
-            <v-text-field
-              v-model="description"
-              type="text"
-              name="decription"
-              id="decription"
-              placeholder="description"
-            />
-          </v-col>
-          <v-col align-self="center">
-            <v-btn type="submit" class="btn blue darken-2" :disabled="!disableForm">
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
+        <v-form @submit.prevent="addTodo">
+          <v-row gutters>
+            <v-col :cols="3">
+              <v-text-field
+                v-model="title"
+                type="text"
+                name="title"
+                id="title"
+                placeholder="title"
+              />
+            </v-col>
+            <v-col :cols="8">
+              <v-text-field
+                v-model="description"
+                type="text"
+                name="decription"
+                id="decription"
+                placeholder="description"
+              />
+            </v-col>
+            <v-col align-self="center" :cols="1">
+              <v-btn
+                type="submit"
+                class="btn"
+                :disabled="!disableForm"
+              >
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
       </v-container>
-    </v-form>
-    <p v-if="isFormEmpty" class="message">
-      todo title & todo description could not be empty
-    </p>
-  </section>
+      <p v-if="isFormEmpty" class="message">
+        todo title & todo description could not be empty
+      </p>
+    </v-card>
+
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import AddIcon from './UI/icons/AddIcon.vue'
 
 export default defineComponent({
   props: {
     disableForm: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -72,32 +78,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.todo-input-section {
-  background-color: #f1f3f5;
-  padding: 10px;
 
+.new-todo-form {
+  border-radius: 0;
 }
-
-
-.btn {
-  color: #fff;
-}
-
-.icon {
-  width: 24px;
-}
-
-/* .input {
-  height: 40px;
-  border: 2px solid #1c7ed6;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 0 15px;
-}
-.input:focus {
-  outline: #339af0 solid 2px;
-} */
-
 .message {
   font-size: 12px;
   color: red;

@@ -32,8 +32,14 @@ export const actions: ActionTree<RootState, RootState> = {
         return
       }
       token = tokenCookie.split('=')[1]
-    } else {
+      console.log('[COOKIE]: ' + token);
+      
+    } 
+    else {
+      
       token = localStorage.getItem('Authorization')
+      console.log('[LOCAL]: ' + token);
+
     }
     ctx.commit('setToken', token)
   },
