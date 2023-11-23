@@ -1,44 +1,38 @@
 <template>
-
-    <v-card flat class="new-todo-form accent">
+  <v-card flat class="new-todo-form accent">
+    <v-form @submit.prevent="addTodo">
       <v-container>
-        <v-form @submit.prevent="addTodo">
-          <v-row gutters>
-            <v-col :cols="3">
-              <v-text-field
-                v-model="title"
-                type="text"
-                name="title"
-                id="title"
-                placeholder="title"
-              />
-            </v-col>
-            <v-col :cols="8">
-              <v-text-field
-                v-model="description"
-                type="text"
-                name="decription"
-                id="decription"
-                placeholder="description"
-              />
-            </v-col>
-            <v-col align-self="center" :cols="1">
-              <v-btn
-                type="submit"
-                class="btn"
-                :disabled="!disableForm"
-              >
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-form>
+        <v-row >
+          <v-col cols="12" md="3" class="px-2 py-0">
+            <v-text-field
+              v-model="title"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="title"
+            />
+          </v-col>
+          <v-col cols="12" md="8"  class="px-2 py-0">
+            <v-text-field
+              v-model="description"
+              type="text"
+              name="decription"
+              id="decription"
+              placeholder="description"
+            />
+          </v-col>
+          <v-col align-self="center" cols="12" md="1" >
+            <v-btn type="submit" class="btn" block :disabled="!disableForm">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-container>
-      <p v-if="isFormEmpty" class="message">
-        todo title & todo description could not be empty
-      </p>
-    </v-card>
-
+    </v-form>
+    <p v-if="isFormEmpty" class="message">
+      todo title & todo description could not be empty
+    </p>
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -78,7 +72,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 .new-todo-form {
   border-radius: 0;
 }
