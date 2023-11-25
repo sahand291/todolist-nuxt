@@ -1,3 +1,4 @@
+// **OLD API WORKS FINE**
 import { User } from '~/types'
 import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'

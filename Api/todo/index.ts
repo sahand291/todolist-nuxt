@@ -1,3 +1,4 @@
+// **OLD API WORKS FINE**
 import { Context } from '@nuxt/types'
 import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'
