@@ -24,7 +24,6 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar>
     </header>
-
     <v-navigation-drawer right v-model="drawer" absolute temporary>
       <v-list dense>
         <v-list-item link>

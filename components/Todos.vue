@@ -29,11 +29,7 @@ export default defineComponent({
     },
   },
   methods: {
-    printHello() {
-      return 'hello'
-    },
     onSaveTodo(newTodo: Todo) {
-      this.printHello()
       this.$emit('save-todo', newTodo)
     },
     onDeleteTodo(id: string) {

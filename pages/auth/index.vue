@@ -4,37 +4,21 @@
       <v-form @submit.prevent="onSubmit()" class="form">
         <h1 class="form-title">{{ isSigninMode ? 'Login' : 'Signup' }}</h1>
         <div class="input-section">
-          <label for="username">
-            Username
-            <span v-if="!usernameValidation" class="error">
-              please enter valid username
-            </span></label
-          >
-          <input
-            class="input"
+          <v-text-field
+            label="username"
             type="text"
-            name="username"
-            id="username"
-            placeholder="Sahand"
+            :rules="usernameRules"
             v-model="enteredUsername"
-            @focusout="validateUsername"
+            required
           />
         </div>
         <div class="input-section">
-          <label for="password"
-            >Password
-            <span v-if="!usernameValidation" class="error">
-              please enter valid username
-            </span></label
-          >
-          <input
-            class="input"
+          <v-text-field
+            label="password"
             type="password"
-            name="password"
-            placeholder="password"
-            id="password"
+            :rules="passwordRules"
             v-model="enteredPassword"
-            @focusout="validatePassword"
+            required
           />
         </div>
         <v-btn class="blue darken-2 white--text" type="submit">
@@ -59,8 +43,16 @@ export default Vue.extend({
       enteredUsername: '',
       enteredPassword: '',
       isSigninMode: true,
-      usernameValidation: true,
-      passwordValidation: true,
+
+      usernameRules: [
+        (v: any) => !!v || 'Username is required',
+        (v: any) => v.length >= 3 || 'Username must be more than 3 characters',
+      ],
+
+      passwordRules: [
+        (v: any) => !!v || 'Password is required',
+        (v: any) => v.length >= 3 || 'Password must be more than 3 characters',
+      ],
     }
   },
 
@@ -93,11 +85,11 @@ export default Vue.extend({
     },
 
     validateUsername() {
-      this.usernameValidation = this.enteredUsername.trim().length !== 0
+      // TODO
     },
 
     validatePassword() {
-      this.passwordValidation = this.enteredPassword.trim().length !== 0
+      //  TODO
     },
   },
 })
@@ -126,16 +118,6 @@ export default Vue.extend({
   gap: 5px;
   label {
     padding-left: 15px;
-  }
-}
-.input {
-  height: 40px;
-  border: 2px solid #1c7ed6;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 0 15px;
-  &:focus {
-    outline: #339af0 solid 2px;
   }
 }
 .btn {

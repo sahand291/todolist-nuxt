@@ -31,10 +31,8 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item>
-            <v-list-item-title @click="newListDialog = true"
-              >Add new todo list</v-list-item-title
-            >
+          <v-list-item @click="newListDialog = true">
+            <v-list-item-title>Add new todo list</v-list-item-title>
           </v-list-item>
           <v-list-item @click="deleteTodoList()">
             <v-list-item-title>Delete todo list</v-list-item-title>
@@ -44,10 +42,10 @@
     </v-card>
     <v-dialog v-model="newListDialog" max-width="500px">
       <v-card>
-        <v-card-title> Dialog 2 </v-card-title>
+        <v-card-title> Add new Todo List </v-card-title>
         <v-card-text>
           <v-text-field
-            label="New Todo List*"
+            label="List name*"
             v-model="newListTitle"
             required
           ></v-text-field>
@@ -98,7 +96,6 @@ export default defineComponent({
     deleteTodoList() {
       console.log('delete todo')
       this.$emit('delete-list', this.selectedListId)
-
     },
   },
   computed: {
