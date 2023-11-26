@@ -7,11 +7,19 @@ type Headers = {
 
 export default class Api {
   constructor(private resource: string) {}
-  post<T>(payload: T, headers?: Headers) {
+  post<T>(payload: T, headers?: any) {
+    console.log(payload, headers)
     return axios.post(
       `http://localhost:3000/${this.resource}`,
-      payload,
-      headers
+      {
+        username: 'string',
+        password: 'string'
+      }, {
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
     )
   }
   get(headers?: Headers) {

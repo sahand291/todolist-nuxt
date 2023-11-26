@@ -4,17 +4,16 @@ import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'
 
 class Auth {
-  sigin(payload: User) {
-    const repositoryApi = new Api('auth/signin')
-    return repositoryApi.post(payload)
+  sigin(payload: User, headers: any) {
+    const repositoryApi = new Api('users/auth/signIn')
+    return repositoryApi.post(payload, headers)
   }
 
   signup(payload: User) {
-    const repositoryApi = new Api('auth/signup')
+    const repositoryApi = new Api('users/auth/signup')
     return repositoryApi.post(payload)
   }
 }
-
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -42,4 +41,3 @@ const authPlugin: Plugin = (context, inject) => {
 }
 
 export default authPlugin
-

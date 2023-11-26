@@ -59,11 +59,19 @@ export default Vue.extend({
   methods: {
     async onSubmit() {
       if (this.isSigninMode) {
-        const res = await this.$auth.sigin({
-          username: this.enteredUsername,
-          password: this.enteredPassword,
-        })
-
+        const res = await this.$auth.sigin(
+          {
+            username: this.enteredUsername,
+            password: this.enteredPassword,
+          },
+          {
+            headers: {
+              accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        console.log(res)
         this.$store.commit('setToken', res.data.data.token)
         cookie.set('Authorization', res.data.data.token)
         localStorage.setItem('Authorization', res.data.data.token)
