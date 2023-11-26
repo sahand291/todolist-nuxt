@@ -1,4 +1,4 @@
-// **OLD API WORKS FINE**
+// **'NEW API'**
 import { User } from '~/types'
 import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'

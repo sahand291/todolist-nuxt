@@ -1,4 +1,4 @@
-// **OLD API WORKS FINE**
+// **NEW API**
 import axios from 'axios'
 
 type Headers = {
