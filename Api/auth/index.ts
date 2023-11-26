@@ -5,12 +5,12 @@ import Api from '~/Api/repository'
 
 class Auth {
   sigin(payload: User) {
-    const repositoryApi = new Api('auth/signin')
+    const repositoryApi = new Api('users/auth/signin')
     return repositoryApi.post(payload)
   }
 
   signup(payload: User) {
-    const repositoryApi = new Api('auth/signup')
+    const repositoryApi = new Api('users/auth/signup')
     return repositoryApi.post(payload)
   }
 }

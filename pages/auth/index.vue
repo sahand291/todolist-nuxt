@@ -59,24 +59,35 @@ export default Vue.extend({
   methods: {
     async onSubmit() {
       if (this.isSigninMode) {
-        const res = await this.$auth.sigin({
-          username: this.enteredUsername,
-          password: this.enteredPassword,
-        })
-
-        this.$store.commit('setToken', res.data.data.token)
-        cookie.set('Authorization', res.data.data.token)
-        localStorage.setItem('Authorization', res.data.data.token)
-        if (res.data.data.token) {
-          this.$router.push('/')
+        try {
+          const res = await this.$auth.sigin({
+            username: this.enteredUsername,
+            password: this.enteredPassword,
+          })
+          console.log(res.data.data.accessToken)
+          this.$store.commit('setToken', res.data.data.accessToken)
+          cookie.set('Authorization', res.data.data.accessToken)
+          localStorage.setItem('Authorization', res.data.data.accessToken)
+          if (res.data.data.accessToken) {
+            this.$router.push('/')
+          }
+        } catch (error) {
+          console.log(error)
+          // TODO show error message to the user
         }
       } else {
-        const res = await this.$auth.signup({
-          username: this.enteredUsername,
-          password: this.enteredPassword,
-        })
+        try {
+          const res = await this.$auth.signup({
+            username: this.enteredUsername,
+            password: this.enteredPassword,
+          })
 
-        console.log(res)
+          console.log(res)
+
+        } catch (error) {
+          console.log(error)
+          // TODO: 
+        }
       }
     },
 
