@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 
 export default class Api {
   private token = Cookies.get('Authorization')
-
+  
   constructor(private resource: string) {}
   post<T>(payload: T) {
     return axios.post(`http://localhost:3000/${this.resource}`, payload, {

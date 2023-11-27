@@ -64,10 +64,10 @@ export default Vue.extend({
             username: this.enteredUsername,
             password: this.enteredPassword,
           })
-          console.log(res.data.data.accessToken)
+
           this.$store.commit('setToken', res.data.data.accessToken)
           cookie.set('Authorization', res.data.data.accessToken)
-          localStorage.setItem('Authorization', res.data.data.accessToken)
+
           if (res.data.data.accessToken) {
             this.$router.push('/')
           }
@@ -83,10 +83,9 @@ export default Vue.extend({
           })
 
           console.log(res)
-
         } catch (error) {
           console.log(error)
-          // TODO: 
+          // TODO:
         }
       }
     },
