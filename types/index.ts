@@ -2,6 +2,7 @@ export type Todo = {
   todoId: string
   todoTitle: string
   todoDescription: string
+  imageId?: string
 }
 
 export type TodoList = {
