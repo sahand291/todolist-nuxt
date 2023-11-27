@@ -87,12 +87,13 @@ export default Vue.extend({
       const currentListId: string = this.selectedListId
 
       const res = await this.$todoApi.addTodo(currentListId, todoData)
-      const allTodos = res.data.data.todos
+      console.log(res.data.data)
+      
       const currentListIndex: number = this.getTodoListIndex(currentListId)
       const newTodo: Todo = {
-        todoId: allTodos[allTodos.length - 1]._id,
-        todoTitle: allTodos[allTodos.length - 1].title,
-        todoDescription: allTodos[allTodos.length - 1].description,
+        todoId: res.data.data.id,
+        todoTitle: res.data.data.title,
+        todoDescription: res.data.data.description,
       }
       this.todoListsData[currentListIndex].todos.push(newTodo)
     },
@@ -100,10 +101,10 @@ export default Vue.extend({
     //add new list to database(api request)
     async onAddList(newListTitle: string) {
       const res = await this.$todoApi.addList({ listTitle: newListTitle })
-      console.log(res.data.data._id)
+      console.log(res.data.data.id)
 
       const newTodoList: TodoList = {
-        listId: res.data.data._id,
+        listId: res.data.data.id,
         listTitle: newListTitle,
         todos: [] as Todo[],
       }
@@ -112,7 +113,7 @@ export default Vue.extend({
 
     // save edited todo in the database and in the state
     async onSaveEditedTodo(newTodo: Todo) {
-      await this.$todoApi.editTodo(newTodo.todoId, {
+      await this.$todoApi.editTodo(this.selectedListId, newTodo.todoId,  {
         title: newTodo.todoTitle,
         description: newTodo.todoDescription,
       })
@@ -147,23 +148,25 @@ export default Vue.extend({
 
     async getAllTodoLists() {
       const res = await this.$todoApi.getTodoLists()
-      res.data.data.map((todoList: any) => {
+      console.log(res)
+      res.data.data.list.map((todoList: any) => {
         const todos: Todo[] = []
         todoList.todos.map((todo: any) => {
           const newTodo: Todo = {
-            todoId: todo._id,
+            todoId: todo.id,
             todoTitle: todo.title,
             todoDescription: todo.description,
           }
           todos.push(newTodo)
         })
         const newTodoList: TodoList = {
-          listId: todoList._id,
+          listId: todoList.id,
           listTitle: todoList.listTitle,
           todos: todos,
         }
         this.todoListsData.push(newTodoList)
       })
+
       // this.selectTodos(this.selectedListId)
     },
   },

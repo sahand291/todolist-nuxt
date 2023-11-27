@@ -1,37 +1,49 @@
 // **NEW API**
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
-type Headers = {
-  headers: { Authorization: string }
-}
 
 export default class Api {
+  private token = Cookies.get('Authorization')
+
   constructor(private resource: string) {}
-  post<T>(payload: T, headers?: Headers) {
-    return axios.post(
-      `http://localhost:3000/${this.resource}`,
-      payload,
-      headers
-    )
+  post<T>(payload: T) {
+    return axios.post(`http://localhost:3000/${this.resource}`, payload, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    })
   }
-  get(headers?: Headers) {
-    return axios.get(`http://localhost:3000/${this.resource}`, headers)
+  get() {
+    return axios.get(`http://localhost:3000/${this.resource}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    })
   }
   put<T>(payload: T) {
-    return axios.put(`http://localhost:3000/${this.resource}`, payload)
+    return axios.put(`http://localhost:3000/${this.resource}`, payload, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    })
   }
-  delete(id: string, headers?: Headers) {
-    return axios.delete(`http://localhost:3000/${this.resource}/${id}`, headers)
+  delete() {
+    return axios.delete(`http://localhost:3000/${this.resource}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    })
   }
-  patch<T>(
-    id: string,
-    payload: T,
-    headers?: { headers: { Authorization: string } }
-  ) {
+  patch<T>(payload: T) {
     return axios.patch(
-      `http://localhost:3000/${this.resource}/${id}`,
+      `http://localhost:3000/${this.resource}`,
       payload,
-      headers
+      {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }
     )
   }
 }
