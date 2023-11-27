@@ -1,4 +1,6 @@
 // **NEW API**
+import VueRouter from 'vue-router'
+import {Route} from 'vue-router'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -45,5 +47,12 @@ export default class Api {
         },
       }
     )
+  }
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $router: VueRouter,
+    $route: Route
   }
 }
