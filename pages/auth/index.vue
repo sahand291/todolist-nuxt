@@ -65,10 +65,10 @@ export default Vue.extend({
             password: this.enteredPassword,
           })
 
-          this.$store.commit('setToken', res.data.data.accessToken)
-          cookie.set('Authorization', res.data.data.accessToken)
+          this.$store.commit('setToken', res?.data.data.accessToken)
+          cookie.set('Authorization', res?.data.data.accessToken)
 
-          if (res.data.data.accessToken) {
+          if (res?.data.data.accessToken) {
             this.$router.push('/')
           }
         } catch (error) {

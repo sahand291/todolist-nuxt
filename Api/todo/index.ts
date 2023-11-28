@@ -3,19 +3,54 @@ import { Context } from '@nuxt/types'
 import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'
 
+import { Todo, TodoList } from '~/types'
+
 class TodoApi {
   constructor(private ctx: Context) {}
 
-  getTodoLists() {
+  async getTodoLists() : Promise<TodoList[] | undefined> {
     const repositoryApi = new Api('users/todolist')
+    
+    try {
+    const todoListsData: TodoList[] = []
+    const res = await  repositoryApi.get()
 
-    return repositoryApi.get()
+    res?.data.data.list.map((todoList: any)  => {
+      const todos: Todo[] = []
+      todoList.todos.map((todo: any) => {
+        const newTodo: Todo = {
+          todoId: todo.id,
+          todoTitle: todo.title,
+          todoDescription: todo.description,
+        }
+        todos.push(newTodo)
+      })
+      const newTodoList: TodoList = {
+        listId: todoList.id,
+        listTitle: todoList.listTitle,
+        todos: todos,
+      }
+      todoListsData.push(newTodoList)
+    })
+    return todoListsData;
+    } catch (error) {
+      
+    }
   }
 
-  addTodo(id: string, todo: { title: string; description: string }) {
+  async addTodo(id: string, todo: { title: string; description: string }) : Promise<Todo | undefined> {
     const repositoryApi = new Api(`users/todo/${id}`)
-
-    return repositoryApi.post(todo)
+    try {
+      const res = await repositoryApi.post(todo)
+      const newTodo: Todo = {
+        todoId: res?.data.data.id,
+        todoTitle: res?.data.data.title,
+        todoDescription: res?.data.data.description,
+      }
+      return newTodo
+    } catch (error) {
+      
+    }
   }
 
   addList(newListTitle: { listTitle: string }) {

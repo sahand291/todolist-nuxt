@@ -84,27 +84,28 @@ export default Vue.extend({
     // adds new todo to  a todolist with specific id (with api request and saving in the state)
     async onAddTodo(todoData: { title: string; description: string }) {
       this.isListEmpty = false
-      const currentListId: string = this.selectedListId
-
-      const res = await this.$todoApi.addTodo(currentListId, todoData)
-      console.log(res.data.data)
-      
-      const currentListIndex: number = this.getTodoListIndex(currentListId)
-      const newTodo: Todo = {
-        todoId: res.data.data.id,
-        todoTitle: res.data.data.title,
-        todoDescription: res.data.data.description,
+      try {
+        const newTodo = await this.$todoApi.addTodo(
+          this.selectedListId,
+          todoData
+        )
+        const currentListIndex: number = this.getTodoListIndex(
+          this.selectedListId
+        )
+        if (newTodo) {
+          this.todoListsData[currentListIndex].todos.push(newTodo)
+        }
+      } catch (error) {
+        //
       }
-      this.todoListsData[currentListIndex].todos.push(newTodo)
     },
 
     //add new list to database(api request)
     async onAddList(newListTitle: string) {
+      // TODO return newTodoList from todo repository api
       const res = await this.$todoApi.addList({ listTitle: newListTitle })
-      console.log(res.data.data.id)
-
       const newTodoList: TodoList = {
-        listId: res.data.data.id,
+        listId: res?.data.data.id,
         listTitle: newListTitle,
         todos: [] as Todo[],
       }
@@ -113,61 +114,50 @@ export default Vue.extend({
 
     // save edited todo in the database and in the state
     async onSaveEditedTodo(newTodo: Todo) {
-      await this.$todoApi.editTodo(this.selectedListId, newTodo.todoId,  {
-        title: newTodo.todoTitle,
-        description: newTodo.todoDescription,
-      })
+      try {
+        await this.$todoApi.editTodo(this.selectedListId, newTodo.todoId, {
+          title: newTodo.todoTitle,
+          description: newTodo.todoDescription,
+        })
 
-      this.replaceTodo(this.selectedListId, newTodo)
+        this.replaceTodo(this.selectedListId, newTodo)
+      } catch (error) {
+        //
+      }
     },
 
     //delete todo from data base and the state
     async onDeleteTodo(todoId: string) {
-      await this.$todoApi.deleteTodo(todoId)
+      try {
+        await this.$todoApi.deleteTodo(todoId)
 
-      const listIndex: number = this.getTodoListIndex(this.selectedListId)
-      const todoIndex: number = this.todoListsData[listIndex].todos.findIndex(
-        (todo: Todo) => todo.todoId === todoId
-      )
-      this.todoListsData[listIndex].todos.splice(todoIndex, 1)
+        const listIndex: number = this.getTodoListIndex(this.selectedListId)
+        const todoIndex: number = this.todoListsData[listIndex].todos.findIndex(
+          (todo: Todo) => todo.todoId === todoId
+        )
+        this.todoListsData[listIndex].todos.splice(todoIndex, 1)
+      } catch (error) {}
     },
 
     async onDeleteList(listId: string) {
-      await this.$todoApi.deleteList(listId)
+      try {
+        await this.$todoApi.deleteList(listId)
 
-      const listIndex: number = this.getTodoListIndex(this.selectedListId)
-      // const todoIndex: number = this.todoListsData[listIndex].todos.findIndex(
-      //   (todo: Todo) => todo.todoId === todoId
-      // )
-      console.log(this.todoListsData)
-
-      this.todoListsData.splice(listIndex, 1)
-      this.todos = []
-      this.isListSelected = false
+        const listIndex: number = this.getTodoListIndex(this.selectedListId)
+        this.todoListsData.splice(listIndex, 1)
+        this.todos = []
+        this.isListSelected = false
+      } catch (error) {}
     },
 
     async getAllTodoLists() {
-      const res = await this.$todoApi.getTodoLists()
-      console.log(res)
-      res.data.data.list.map((todoList: any) => {
-        const todos: Todo[] = []
-        todoList.todos.map((todo: any) => {
-          const newTodo: Todo = {
-            todoId: todo.id,
-            todoTitle: todo.title,
-            todoDescription: todo.description,
-          }
-          todos.push(newTodo)
-        })
-        const newTodoList: TodoList = {
-          listId: todoList.id,
-          listTitle: todoList.listTitle,
-          todos: todos,
-        }
-        this.todoListsData.push(newTodoList)
-      })
-
-      // this.selectTodos(this.selectedListId)
+      try {
+        const res = await this.$todoApi.getTodoLists()
+        this.todoListsData = res ?? []
+      } catch (error) {
+        console.log('+++++++++++++++++++unable to load todo lists')
+        console.log(error)
+      }
     },
   },
 
