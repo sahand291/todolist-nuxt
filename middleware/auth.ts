@@ -12,7 +12,8 @@ export default (ctx: Context) => {
   } else {
     token = Cookies.get('Authorization')
   }
-
+  console.log(token);
+  
   ctx.store.commit('setToken', token)
 
   if (!token) {
