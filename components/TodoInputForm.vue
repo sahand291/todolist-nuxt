@@ -21,15 +21,15 @@
               placeholder="description"
             />
           </v-col>
-          <v-col align-self="center"  cols="12" md="1">
+          <v-col align-self="center" cols="12" md="1">
             <v-file-input
               :hide-input="$vuetify.breakpoint.mdAndUp"
               accept="image/png, image/jpeg"
               placeholder="Pick an avatar"
               prepend-icon="mdi-camera"
               label="image"
-              class="pa-0 ma-auto"
-
+              class="pa-0"
+              v-model="imageData"
             ></v-file-input>
           </v-col>
           <v-col align-self="center" cols="12" md="1">
@@ -60,6 +60,7 @@ export default defineComponent({
     return {
       title: '',
       description: '',
+      imageData: null as any,
       isFormEmpty: false,
     }
   },

@@ -82,13 +82,19 @@ export default Vue.extend({
     },
 
     // adds new todo to  a todolist with specific id (with api request and saving in the state)
-    async onAddTodo(todoData: { title: string; description: string }) {
+    async onAddTodo(todoData: {
+      title: string
+      description: string
+      
+    }) {
       this.isListEmpty = false
       try {
         const newTodo = await this.$todoApi.addTodo(
           this.selectedListId,
           todoData
         )
+
+
         const currentListIndex: number = this.getTodoListIndex(
           this.selectedListId
         )
