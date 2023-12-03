@@ -63,7 +63,7 @@ export default Vue.extend({
         username: this.enteredUsername,
         password: this.enteredPassword
       }
-      
+
       if (this.isSigninMode) {
         try {
           const res = await this.$auth.sigin(userData)
@@ -76,6 +76,7 @@ export default Vue.extend({
           }
         } catch (error) {
           console.log(error)
+          this.$toast.error('testing toast: user and password is not correct')
           // TODO show error message to the userData
         }
       } else {

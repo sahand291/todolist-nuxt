@@ -27,6 +27,7 @@ export default class Api {
       })
       return res
     } catch (error: any) {
+     console.log(error.message  )     
       this.checkAuth(error)
 
       throw new Error(error)
@@ -41,6 +42,8 @@ export default class Api {
       })
       return res
     } catch (error: any) {
+      console.log(error.data);
+
       this.checkAuth(error)
     }
   }
