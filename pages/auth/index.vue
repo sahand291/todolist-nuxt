@@ -36,6 +36,7 @@
 import Vue from 'vue'
 
 import cookie from 'js-cookie'
+import { User } from '~/Api/auth/index.d'
 
 export default Vue.extend({
   data() {
@@ -58,12 +59,14 @@ export default Vue.extend({
 
   methods: {
     async onSubmit() {
+      const userData: User = {
+        username: this.enteredUsername,
+        password: this.enteredPassword
+      }
+      
       if (this.isSigninMode) {
         try {
-          const res = await this.$auth.sigin({
-            username: this.enteredUsername,
-            password: this.enteredPassword,
-          })
+          const res = await this.$auth.sigin(userData)
 
           this.$store.commit('setToken', res?.data.data.accessToken)
           cookie.set('Authorization', res?.data.data.accessToken)
@@ -73,14 +76,11 @@ export default Vue.extend({
           }
         } catch (error) {
           console.log(error)
-          // TODO show error message to the user
+          // TODO show error message to the userData
         }
       } else {
         try {
-          const res = await this.$auth.signup({
-            username: this.enteredUsername,
-            password: this.enteredPassword,
-          })
+          const res = await this.$auth.signup(userData)
 
           console.log(res)
         } catch (error) {

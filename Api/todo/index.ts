@@ -13,6 +13,7 @@ class TodoApi {
 
     try {
       const todoListsData: TodoList[] = []
+
       const res = await repositoryApi.get()
 
       res?.data.data.list.map((todoList: any) => {
@@ -55,11 +56,11 @@ class TodoApi {
   }
 
   async addTodo(
-    id: string,
+    listId: string,
     todo: { title: string; description: string },
     todoImage: any
   ): Promise<Todo | undefined> {
-    const repositoryApi = new Api(`users/todo/${id}`)
+    const repositoryApi = new Api(`users/todo/${listId}`)
     let imageId: string | undefined = undefined
     try {
       const res = await repositoryApi.post({
@@ -121,9 +122,6 @@ class TodoApi {
 
     try {
       const response = await repositoryApi.postImage(formData)
-      console.log('Photo uploaded successfully.')
-      console.log(response?.data.data.id)
-      console.log(response)
 
       return response?.data.data.id
     } catch (error) {
