@@ -2,7 +2,7 @@ export type Todo = {
   todoId: string
   todoTitle: string
   todoDescription: string
-  imageId?: string
+  imageId: string | undefined
 }
 
 export type TodoList = {
@@ -11,7 +11,3 @@ export type TodoList = {
   todos: Todo[]
 }
 
-export type User = {
-  username: string,
-  password: string
-}

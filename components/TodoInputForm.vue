@@ -71,9 +71,10 @@ export default defineComponent({
         this.$emit('add-todo', {
           title: this.title,
           description: this.description,
-        })
+        }, this.imageData)
         this.title = ''
         this.description = ''
+        this.imageData = null
       } else {
         this.isFormEmpty = true
       }

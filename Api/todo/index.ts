@@ -3,7 +3,7 @@ import { Context } from '@nuxt/types'
 import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'
 
-import { Todo, TodoList } from '~/types'
+import { Todo, TodoList } from '~/Api/todo/index.d'
 
 class TodoApi {
   constructor(private ctx: Context) {}
@@ -22,6 +22,7 @@ class TodoApi {
             todoId: todo.id,
             todoTitle: todo.title,
             todoDescription: todo.description,
+            imageId: '65674805578774aa37b6c8f8', //TODO image id should accessable from api
           }
           todos.push(newTodo)
         })
@@ -36,24 +37,52 @@ class TodoApi {
     } catch (error) {}
   }
 
+  async getOneTodo(todoId: string): Promise<Todo | undefined> {
+    const repositoryApi = new Api(`users/todo/${todoId}`)
+
+    try {
+      const res = await repositoryApi.get()
+
+      const thisTodo: Todo = {
+        todoId: res?.data.data.id,
+        todoTitle: res?.data.data.title,
+        todoDescription: res?.data.data.description,
+        imageId: '65674805578774aa37b6c8f8', //TODO image id should accessable from api
+      }
+
+      return thisTodo
+    } catch (error) {}
+  }
+
   async addTodo(
     id: string,
-    todo: { title: string; description: string}
+    todo: { title: string; description: string },
+    todoImage: any
   ): Promise<Todo | undefined> {
     const repositoryApi = new Api(`users/todo/${id}`)
+    let imageId: string | undefined = undefined
     try {
       const res = await repositoryApi.post({
         title: todo.title,
         description: todo.description,
       })
+      if (todoImage) {
+        console.log(todoImage)
+        imageId = await this.uploadImage(res?.data.data.id, todoImage)
+      }
 
       const newTodo: Todo = {
         todoId: res?.data.data.id,
         todoTitle: res?.data.data.title,
         todoDescription: res?.data.data.description,
+        imageId: imageId,
       }
+
       return newTodo
-    } catch (error) {}
+    } catch (error) {
+      console.log('dsfsdfs')
+      throw new Error('failed to add todo')
+    }
   }
 
   addList(newListTitle: { listTitle: string }) {

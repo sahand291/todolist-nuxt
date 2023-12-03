@@ -2,7 +2,7 @@
   <section>
     <header class="mb-4 hidden-sm-and-down">
       <v-toolbar class="ma-0">
-        <v-toolbar-title>Todo List</v-toolbar-title>
+        <v-toolbar-title>{{ $config.baseURL  }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <div>
           <v-btn class="blue darken-2 mr-2" @click="changeTheme"

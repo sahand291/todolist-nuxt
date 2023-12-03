@@ -29,7 +29,7 @@ import Todos from '~/components/Todos.vue'
 import TodoInputForm from '~/components/TodoInputForm.vue'
 import TodoListControl from '~/components/TodoListControl.vue'
 
-import { Todo, TodoList } from '~/types'
+import { Todo, TodoList } from '~/Api/todo/index.d'
 
 export default Vue.extend({
   layout: 'default',
@@ -86,12 +86,12 @@ export default Vue.extend({
       title: string
       description: string
       
-    }) {
+    }, imageData: any) {
       this.isListEmpty = false
       try {
         const newTodo = await this.$todoApi.addTodo(
           this.selectedListId,
-          todoData
+          todoData, imageData
         )
 
 

@@ -1,5 +1,5 @@
 // **'NEW API'**
-import { User } from '~/types'
+import { User } from '~/Api/auth/index.d'
 import { Plugin } from '@nuxt/types'
 import Api from '~/Api/repository'
 

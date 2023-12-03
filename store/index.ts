@@ -1,5 +1,6 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { Todo, TodoList } from '~/types'
+
+
 
 export const state = () => ({
   token: null as string | null,

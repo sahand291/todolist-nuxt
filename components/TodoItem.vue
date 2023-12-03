@@ -5,12 +5,16 @@
       <p>{{ todoDsc }}</p>
     </div>
     <div class="controls">
-      <button @click="editMode()" class="btn btn-edit">
-        <EditIcon />
-      </button>
-      <button @click="deleteTodo(todoId)" class="btn btn-delete">
-        <DeleteIcon />
-      </button>
+      <v-btn fab small :to="`/todo/${todoId}`">
+        <v-icon> mdi-dots-horizontal-circle-outline </v-icon>
+      </v-btn>
+      <v-btn fab small @click="editMode()" class="btn btn-edit">
+        <v-icon>mdi-square-edit-outline</v-icon>
+      </v-btn>
+      <v-btn fab small @click="deleteTodo(todoId)" class="btn btn-delete" >
+        
+        <v-icon> mdi-trash-can</v-icon>
+      </v-btn>
     </div>
   </li>
 
@@ -44,7 +48,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Todo } from '~/types'
+import { Todo } from '~/Api/todo/index.d'
+
 
 import DeleteIcon from '~/components/UI/icons/DeleteIcon.vue'
 import EditIcon from '~/components/UI/icons/EditIcon.vue'
@@ -93,6 +98,9 @@ export default Vue.extend({
       } as Todo)
     },
   },
+  mounted() {
+   
+  }
 })
 </script>
 

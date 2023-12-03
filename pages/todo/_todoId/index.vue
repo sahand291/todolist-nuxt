@@ -2,14 +2,11 @@
   <v-card justify="center" width="500">
     <div class="accent">
       <v-card-title>
-        <h2>Todo title</h2>
+        <h2>{{ thisTodo.todoTitle }}</h2>
       </v-card-title>
     </div>
     <v-card-text>
-      todo description Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Quia assumenda est soluta iure necessitatibus dolores ratione facere! Hic
-      eaque quas delectus, inventore, harum minus deleniti modi ea nobis
-      veritatis sunt.
+      {{ thisTodo.todoDescription }}
       <img :src="fetchedImageData" alt="sdfsdf">
     </v-card-text>
     <form>
@@ -28,10 +25,13 @@ import Vue from 'vue'
 
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { Todo } from '~/Api/todo/index.d'
+
 
 export default Vue.extend({
   data() {
     return {
+      thisTodo: {} as Todo,
       todoId: '',
       imageFile: '' as any,
       fetchedImageData: '' as any,
@@ -80,7 +80,7 @@ export default Vue.extend({
       }
 
       axios
-        .get(`http://127.0.0.1:3000/files/serveimage/${this.imageId}`, {
+        .get(`http://127.0.0.1:3000/files/serveimage/${this.thisTodo.imageId}`, {
           headers,
           responseType: 'blob',
         })
@@ -98,8 +98,11 @@ export default Vue.extend({
         })
     },
   },
-  mounted() {
+  async mounted() {
     this.todoId = this.$route.params.todoId
+    const todo = await this.$todoApi.getOneTodo(this.$route.params.todoId)
+  
+    this.thisTodo = todo!
   },
 })
 </script>

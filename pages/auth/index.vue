@@ -95,11 +95,11 @@ export default Vue.extend({
     },
 
     validateUsername() {
-      // TODO
+ 
     },
 
     validatePassword() {
-      //  TODO
+  
     },
   },
 })
