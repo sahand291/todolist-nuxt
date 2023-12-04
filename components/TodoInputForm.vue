@@ -88,8 +88,5 @@ export default defineComponent({
 .new-todo-form {
   border-radius: 0;
 }
-.message {
-  font-size: 12px;
-  color: red;
-}
+
 </style>

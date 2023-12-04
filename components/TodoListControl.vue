@@ -34,7 +34,7 @@
           <v-list-item @click="newListDialog = true">
             <v-list-item-title>Add new todo list</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="deleteTodoList()">
+          <v-list-item v-if="showDeleteList" @click="deleteTodoList()">
             <v-list-item-title>Delete todo list</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -76,11 +76,12 @@ export default defineComponent({
       selectedListId: '',
       newListDialog: false,
       newListTitle: '',
+      showDeleteList: false
     }
   },
   methods: {
     onselectTodoList(id: string) {
-      console.log('** listId: ' + id)
+      this.showDeleteList = true
 
       this.selectedListId = id
       this.$emit('change', id)
