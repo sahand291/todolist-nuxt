@@ -46,49 +46,37 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Todo } from '~/Api/todo/index.d'
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-export default Vue.extend({
-  props: {
-    todoTitle: {
-      type: String,
-    },
-    todoDsc: {
-      type: String,
-    },
-    todoId: {
-      type: String,
-    },
-  },
-  data() {
-    return {
-      isEditing: false,
-      editedTodoTitle: '',
-      editedTodoDescriptoin: '',
-    }
-  },
-  methods: {
-    deleteTodo(id: string) {
-      this.$emit('delete-todo', id)
-      // this.$todo.deleteTodo(id)
-    },
-    editMode() {
-      this.isEditing = true
-      this.editedTodoTitle = this.todoTitle
-      this.editedTodoDescriptoin = this.todoDsc
-    },
-    saveTodo(id: string) {
-      this.isEditing = false
-      this.$emit('save-todo', {
-        todoId: id,
-        todoTitle: this.editedTodoTitle,
-        todoDescription: this.editedTodoDescriptoin,
-      } as Todo)
-    },
-  },
-  mounted() {},
-})
+@Component
+export default class TodoItem extends Vue {
+  @Prop(String) readonly todoTitle!: string
+  @Prop(String) readonly todoDsc!: string
+  @Prop(String) readonly todoId!: string
+
+  public isEditing: boolean = false
+  public editedTodoTitle: string = ''
+  public editedTodoDescriptoin: string = ''
+
+  deleteTodo(id: string) {
+    this.$emit('delete-todo', id)
+    // this.$todo.deleteTodo(id)
+  }
+  editMode() {
+    this.isEditing = true
+    this.editedTodoTitle = this.todoTitle ?? ''
+    this.editedTodoDescriptoin = this.todoDsc ?? ''
+  }
+  saveTodo(id: string) {
+    this.isEditing = false
+    this.$emit('save-todo', {
+      todoId: id,
+      todoTitle: this.editedTodoTitle,
+      todoDescription: this.editedTodoDescriptoin,
+    } as Todo)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

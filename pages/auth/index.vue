@@ -47,16 +47,6 @@ export default Vue.extend({
       isSigninMode: true,
       isLoading: false,
       switchFromSignup: true,
-
-      usernameRules: [
-        (v: any) => !!v || 'Username is required',
-        (v: any) => v.length >= 3 || 'Username must be more than 3 characters',
-      ],
-
-      passwordRules: [
-        (v: any) => !!v || 'Password is required',
-        (v: any) => v.length >= 3 || 'Password must be more than 3 characters',
-      ],
     }
   },
 
@@ -98,14 +88,11 @@ export default Vue.extend({
         }
       }
     },
-
     switchMode() {
       this.isSigninMode = !this.isSigninMode
     },
 
-    validateUsername() {},
 
-    validatePassword() {},
   },
 })
 </script>

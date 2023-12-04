@@ -14,28 +14,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-
 import TodoItem from './TodoItem.vue'
 
 import { Todo } from '~/Api/todo/index.d'
 
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-export default defineComponent({
-  components: { TodoItem },
-  props: {
-    todos: {
-      type: Array as PropType<Todo[]>,
-      required: true,
-    },
-  },
-  methods: {
-    onSaveTodo(newTodo: Todo) {
-      this.$emit('save-todo', newTodo)
-    },
-    onDeleteTodo(id: string) {
-      this.$emit('delete-todo', id)
-    },
-  },
-})
+@Component({ components: { TodoItem } })
+export default class Todos extends Vue {
+  @Prop() readonly todos!: Todo[]
+
+  onSaveTodo(newTodo: Todo) {
+    this.$emit('save-todo', newTodo)
+  }
+  onDeleteTodo(id: string) {
+    this.$emit('delete-todo', id)
+  }
+}
 </script>

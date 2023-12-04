@@ -62,54 +62,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-export default defineComponent({
-  props: {
-    todoLists: {
-      type: [] as PropType<{ listId: string; listTitle: string }[]>,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      selectedListId: '',
-      newListDialog: false,
-      newListTitle: '',
-      showDeleteList: false
+@Component
+export default class TodoListControl extends Vue {
+  @Prop() readonly todoLists!: { listId: string; listTitle: string }[]
+
+  public selectedListId: string = ''
+  public newListDialog: boolean = false
+  public newListTitle: string = ''
+  public showDeleteList: boolean = false
+
+  onselectTodoList(id: string) {
+    this.showDeleteList = true
+
+    this.selectedListId = id
+    this.$emit('change', id)
+  }
+  addTodoList() {
+    console.log('add Todo')
+    if (this.newListTitle.trim().length > 0) {
+      console.log('newlist')
+      this.$emit('add-list', this.newListTitle)
+      this.newListDialog = false
     }
-  },
-  methods: {
-    onselectTodoList(id: string) {
-      this.showDeleteList = true
+  }
+  deleteTodoList() {
+    console.log('delete todo')
+    this.$emit('delete-list', this.selectedListId)
+  }
 
-      this.selectedListId = id
-      this.$emit('change', id)
-    },
-    addTodoList() {
-      console.log('add Todo')
-      if (this.newListTitle.trim().length > 0) {
-        console.log('newlist')
-        this.$emit('add-list', this.newListTitle)
-        this.newListDialog = false
-      }
-    },
-    deleteTodoList() {
-      console.log('delete todo')
-      this.$emit('delete-list', this.selectedListId)
-    },
-  },
-  computed: {
-    selectedListTitle() {
-      const id: string = this.selectedListId ? this.selectedListId : ''
-      if (id) {
-        return this.todoLists.find((list) => list.listId === id)?.listTitle
-      } else {
-        return false
-      }
-    },
-  },
-})
+  get selectedListTitle() {
+    const id: string = this.selectedListId ? this.selectedListId : ''
+    if (id) {
+      return this.todoLists.find((list) => list.listId === id)?.listTitle
+    } else {
+      return false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

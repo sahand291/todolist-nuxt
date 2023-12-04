@@ -37,32 +37,28 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
 
-export default defineComponent({
-  data() {
-    return {
-      listTitle: '',
-      addListMode: false,
-      isError: false,
-    }
-  },
-  methods: {
-    showAddListForm() {
+@Component
+export default class NewListForm extends Vue {
+  public listTitle: String = ''
+  public addListMode: Boolean = false
+  public isError: Boolean = false
+
+  showAddListForm() {
+    this.addListMode = !this.addListMode
+  }
+  addNewList() {
+    if (this.listTitle.trim().length > 0) {
+      this.isError = false
       this.addListMode = !this.addListMode
-    },
-    addNewList() {
-      if (this.listTitle.trim().length > 0) {
-        this.isError = false
-        this.addListMode = !this.addListMode
-        this.$emit('add-list', this.listTitle)
-      } else {
-        this.isError = true
-      }
-    },
-  },
-})
+      this.$emit('add-list', this.listTitle)
+    } else {
+      this.isError = true
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

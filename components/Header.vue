@@ -2,7 +2,7 @@
   <section>
     <header class="mb-4 hidden-sm-and-down">
       <v-toolbar class="ma-0">
-        <v-toolbar-title>{{ $config.baseURL  }}</v-toolbar-title>
+        <v-toolbar-title>Todo List</v-toolbar-title>
         <v-spacer></v-spacer>
         <div>
           <v-btn class="blue darken-2 mr-2" @click="changeTheme"
@@ -50,33 +50,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { Component, Vue } from 'nuxt-property-decorator'
 
 import cookie from 'js-cookie'
 
-export default defineComponent({
-  data() {
-    return {
-      drawer: false,
-    }
-  },
-  methods: {
-    signout() {
-      localStorage.removeItem('Authorization')
-      cookie.remove('Authorization')
-      this.$router.push('/auth')
-    },
-    changeTheme() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-    },
-  },
-  computed: {
-    showLoginBtn() {
-      return this.$store.getters.getToken
-    },
-  },
+@Component
+export default class Header extends Vue {
+  public drawer: Boolean = false
 
-})
+  signout() {
+    localStorage.removeItem('Authorization')
+    cookie.remove('Authorization')
+    this.$router.push('/auth')
+  }
+  changeTheme() {
+    this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+  }
+
+  get showLoginBtn() {
+    return this.$store.getters.getToken
+  }
+}
 </script>
-
-
