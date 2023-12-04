@@ -86,6 +86,7 @@ export default Vue.extend({
       } else {
         try {
           await this.$auth.signup(userData)
+          this.$toast.success('Account created successfuly. Please Login to your account')
           this.switchMode()
           this.enteredPassword = ''
           this.enteredUsername = ''

@@ -33,7 +33,7 @@ import { Todo, TodoList } from '~/Api/todo/index.d'
 
 export default Vue.extend({
   layout: 'default',
-  middleware: ['check-auth', 'auth'],
+  middleware: ['auth'],
   components: {
     TodoInputForm,
     TodoListControl,
@@ -104,20 +104,26 @@ export default Vue.extend({
           this.todoListsData[currentListIndex].todos.push(newTodo)
         }
       } catch (error) {
-        //
+        this.$toast.error('Failed to add todo')
       }
     },
 
     //add new list to database(api request)
     async onAddList(newListTitle: string) {
-      // TODO return newTodoList from todo repository api
-      const res = await this.$todoApi.addList({ listTitle: newListTitle })
+      try {
+        const res = await this.$todoApi.addList({ listTitle: newListTitle })
       const newTodoList: TodoList = {
         listId: res?.data.data.id,
         listTitle: newListTitle,
         todos: [] as Todo[],
+
       }
       this.todoListsData.push(newTodoList)
+      this.$toast.success(`new list: ${newListTitle} created.`)
+      } catch (error) {
+        this.$toast.error('Failed to add new list')
+      }
+
     },
 
     // save edited todo in the database and in the state
@@ -129,8 +135,10 @@ export default Vue.extend({
         })
 
         this.replaceTodo(this.selectedListId, newTodo)
+        this.$toast.success('Changes are saved.')
+
       } catch (error) {
-        //
+        this.$toast.error('Failed to save changes.')
       }
     },
 
@@ -144,7 +152,12 @@ export default Vue.extend({
           (todo: Todo) => todo.todoId === todoId
         )
         this.todoListsData[listIndex].todos.splice(todoIndex, 1)
-      } catch (error) {}
+        this.$toast.success('Todo deteled successfuly.')
+
+      } catch (error) {
+        this.$toast.error('Failed delete todo.')
+
+      }
     },
 
     async onDeleteList(listId: string) {
@@ -155,7 +168,10 @@ export default Vue.extend({
         this.todoListsData.splice(listIndex, 1)
         this.todos = []
         this.isListSelected = false
-      } catch (error) {}
+        this.$toast.success('List deleted.')
+      } catch (error) {
+        this.$toast.error('Failed to delete list')
+      }
     },
 
     async getAllTodoLists() {
@@ -163,8 +179,7 @@ export default Vue.extend({
         const res = await this.$todoApi.getTodoLists()
         this.todoListsData = res ?? []
       } catch (error) {
-        console.log('+++++++++++++++++++unable to load todo lists')
-        console.log(error)
+        this.$toast.error('Failed to load todos')
       }
     },
   },

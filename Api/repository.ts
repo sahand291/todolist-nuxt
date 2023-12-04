@@ -10,6 +10,11 @@ export default class Api {
   private headers = {
     Authorization: `Bearer ${this.token}`,
   }
+  private checkAuth(error: any) {
+    if (error.response.status === 401) {
+      window.$nuxt.$router.push('/auth')
+    }
+  }
 
   constructor(private resource: string) {
     this.apiURL = window.$nuxt.$config.baseURL + resource
@@ -24,7 +29,6 @@ export default class Api {
       return res
     } catch (error: any) {
       this.checkAuth(error)
-
       throw new Error(error)
     }
   }
@@ -37,9 +41,8 @@ export default class Api {
       })
       return res
     } catch (error: any) {
-      console.log(error.data)
-
       this.checkAuth(error)
+      throw new Error(error)
     }
   }
   async put<T>(payload: T) {
@@ -52,6 +55,7 @@ export default class Api {
       return res
     } catch (error: any) {
       this.checkAuth(error)
+      throw new Error(error)
     }
   }
   async delete() {
@@ -64,6 +68,7 @@ export default class Api {
       return res
     } catch (error: any) {
       this.checkAuth(error)
+      throw new Error(error)
     }
   }
   async patch<T>(payload: T) {
@@ -76,6 +81,7 @@ export default class Api {
       return res
     } catch (error: any) {
       this.checkAuth(error)
+      throw new Error(error)
     }
   }
 
@@ -91,6 +97,7 @@ export default class Api {
       return res
     } catch (error: any) {
       this.checkAuth(error)
+      throw new Error(error)
     }
   }
   async getImage() {
@@ -103,12 +110,7 @@ export default class Api {
       return res
     } catch (error: any) {
       this.checkAuth(error)
-    }
-  }
-
-  private checkAuth(error: any) {
-    if (error.response.status === 401) {
-      window.$nuxt.$router.push('/auth')
+      throw new Error(error)
     }
   }
 }
