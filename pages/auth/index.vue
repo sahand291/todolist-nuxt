@@ -126,18 +126,5 @@ export default Vue.extend({
   }
 }
 
-.btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #1c7ed6;
-  font-weight: 700;
-  font-size: 20px;
-  color: #ffffff;
-}
 
-.error {
-  font-size: 12px;
-  color: red;
-}
 </style>

@@ -53,7 +53,6 @@
 import { defineComponent } from 'vue'
 
 import cookie from 'js-cookie'
-import LogoutIcon from './icons/LogoutIcon.vue'
 
 export default defineComponent({
   data() {
@@ -76,11 +75,8 @@ export default defineComponent({
       return this.$store.getters.getToken
     },
   },
-  components: { LogoutIcon },
+
 })
 </script>
 
-<style lang="scss" scoped>
-.header {
-}
-</style>
+

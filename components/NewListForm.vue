@@ -3,7 +3,7 @@
     <v-container>
       <v-card class="new-list-form accent">
         <v-btn
-        color="btn"
+          color="btn"
           class="white--text blue darken-2"
           v-if="!addListMode"
           @click="showAddListForm"
@@ -41,7 +41,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-
   data() {
     return {
       listTitle: '',
@@ -69,46 +68,16 @@ export default defineComponent({
 <style lang="scss" scoped>
 .new-list-section {
   margin-bottom: 20px;
-}
-.new-list-form {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.form {
-  display: flex;
-  gap: 10px;
-}
-
-.btn {
-  padding: 10px;
-  border: none;
-  color: #fff;
-  background-color: #1c7ed6;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.input {
-  height: 40px;
-  border: 2px solid #1c7ed6;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 0 15px;
-  &:focus {
-    outline: #339af0 solid 2px;
+  .new-list-form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .form {
+      display: flex;
+      gap: 10px;
+    }
   }
-}
-
-.input-error {
-  border: 2px solid #f03e3e;
-}
-
-.error-msg {
-  color: #f03e3e;
-  font-size: 12px;
 }
 </style>

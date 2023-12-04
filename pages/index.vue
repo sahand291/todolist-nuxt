@@ -82,18 +82,20 @@ export default Vue.extend({
     },
 
     // adds new todo to  a todolist with specific id (with api request and saving in the state)
-    async onAddTodo(todoData: {
-      title: string
-      description: string
-      
-    }, imageData: any) {
+    async onAddTodo(
+      todoData: {
+        title: string
+        description: string
+      },
+      imageData: any
+    ) {
       this.isListEmpty = false
       try {
         const newTodo = await this.$todoApi.addTodo(
           this.selectedListId,
-          todoData, imageData
+          todoData,
+          imageData
         )
-
 
         const currentListIndex: number = this.getTodoListIndex(
           this.selectedListId
@@ -193,15 +195,14 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .todo-list {
   overflow: hidden;
-}
-
-.message {
-  text-align: center;
-  font-weight: 700;
-  font-size: 20px;
-  padding: 50px 0;
+  .message {
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 50px 0;
+  }
 }
 </style>

@@ -8,11 +8,10 @@
       <v-btn fab small :to="`/todo/${todoId}`">
         <v-icon> mdi-dots-horizontal-circle-outline </v-icon>
       </v-btn>
-      <v-btn fab small @click="editMode()" >
+      <v-btn fab small @click="editMode()">
         <v-icon>mdi-square-edit-outline</v-icon>
       </v-btn>
-      <v-btn fab small @click="deleteTodo(todoId)"  >
-        
+      <v-btn fab small @click="deleteTodo(todoId)">
         <v-icon> mdi-trash-can</v-icon>
       </v-btn>
     </div>
@@ -36,10 +35,10 @@
       />
     </div>
     <div class="controls">
-      <v-btn @click="saveTodo(todoId)" >
+      <v-btn @click="saveTodo(todoId)">
         <v-icon>mdi-save</v-icon>
       </v-btn>
-      <v-btn @click="deleteTodo(todoId)" >
+      <v-btn @click="deleteTodo(todoId)">
         <v-icon>mdi-trash-can</v-icon>
       </v-btn>
     </div>
@@ -51,7 +50,6 @@ import Vue from 'vue'
 import { Todo } from '~/Api/todo/index.d'
 
 export default Vue.extend({
-
   props: {
     todoTitle: {
       type: String,
@@ -89,13 +87,11 @@ export default Vue.extend({
       } as Todo)
     },
   },
-  mounted() {
-   
-  }
+  mounted() {},
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .todo-card {
   display: flex;
   justify-content: space-between;
@@ -104,16 +100,16 @@ export default Vue.extend({
   border: 1px solid #e9ecef;
   margin: 20px;
   padding: 5px 10px;
-}
 
-.todo-details {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+  .todo-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.controls {
-  display: flex;
-  gap: 5px;
+  .controls {
+    display: flex;
+    gap: 5px;
+  }
 }
 </style>

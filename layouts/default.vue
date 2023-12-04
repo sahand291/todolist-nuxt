@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Header from '~/components/UI/Header.vue'
+import Header from '~/components/Header.vue'
 
 export default defineComponent({
   components: { Header },
