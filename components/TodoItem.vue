@@ -8,10 +8,10 @@
       <v-btn fab small :to="`/todo/${todoId}`">
         <v-icon> mdi-dots-horizontal-circle-outline </v-icon>
       </v-btn>
-      <v-btn fab small @click="editMode()" class="btn btn-edit">
+      <v-btn fab small @click="editMode()" >
         <v-icon>mdi-square-edit-outline</v-icon>
       </v-btn>
-      <v-btn fab small @click="deleteTodo(todoId)" class="btn btn-delete" >
+      <v-btn fab small @click="deleteTodo(todoId)"  >
         
         <v-icon> mdi-trash-can</v-icon>
       </v-btn>
@@ -36,12 +36,12 @@
       />
     </div>
     <div class="controls">
-      <button @click="saveTodo(todoId)" class="btn btn-edit">
-        <SaveIcon />
-      </button>
-      <button @click="deleteTodo(todoId)" class="btn btn-delete">
-        <DeleteIcon />
-      </button>
+      <v-btn @click="saveTodo(todoId)" >
+        <v-icon>mdi-save</v-icon>
+      </v-btn>
+      <v-btn @click="deleteTodo(todoId)" >
+        <v-icon>mdi-trash-can</v-icon>
+      </v-btn>
     </div>
   </li>
 </template>
@@ -50,17 +50,8 @@
 import Vue from 'vue'
 import { Todo } from '~/Api/todo/index.d'
 
-
-import DeleteIcon from '~/components/UI/icons/DeleteIcon.vue'
-import EditIcon from '~/components/UI/icons/EditIcon.vue'
-import SaveIcon from './UI/icons/SaveIcon.vue'
-
 export default Vue.extend({
-  components: {
-    DeleteIcon,
-    EditIcon,
-    SaveIcon,
-  },
+
   props: {
     todoTitle: {
       type: String,
@@ -124,29 +115,5 @@ export default Vue.extend({
 .controls {
   display: flex;
   gap: 5px;
-}
-.btn {
-  border: none;
-  padding: 6px;
-  border-radius: 5px;
-}
-
-.btn-delete {
-  background-color: #f03e3e;
-}
-
-.btn-edit {
-  background-color: #1c7ed6;
-}
-
-.input {
-  height: 40px;
-  border: 2px solid #1c7ed6;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 0 15px;
-}
-.input:focus {
-  outline: #339af0 solid 2px;
 }
 </style>

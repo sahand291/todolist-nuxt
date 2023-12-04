@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AddIcon from './UI/icons/AddIcon.vue'
+
 
 export default defineComponent({
   props: {
@@ -80,7 +80,7 @@ export default defineComponent({
       }
     },
   },
-  components: { AddIcon },
+  
 })
 </script>
 
