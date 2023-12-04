@@ -13,21 +13,16 @@ export default class Api {
 
   constructor(private resource: string) {
     this.apiURL = window.$nuxt.$config.baseURL + resource
-
-
-    
   }
 
   async post<T>(payload: T) {
     const headers = this.headers
     try {
-      console.log(this.resource)
       const res = await axios.post(this.apiURL, payload, {
         headers,
       })
       return res
     } catch (error: any) {
-     console.log(error.message  )     
       this.checkAuth(error)
 
       throw new Error(error)
@@ -42,7 +37,7 @@ export default class Api {
       })
       return res
     } catch (error: any) {
-      console.log(error.data);
+      console.log(error.data)
 
       this.checkAuth(error)
     }

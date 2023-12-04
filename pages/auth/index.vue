@@ -3,25 +3,26 @@
     <v-card class="form-container">
       <v-form @submit.prevent="onSubmit()" class="form">
         <h1 class="form-title">{{ isSigninMode ? 'Login' : 'Signup' }}</h1>
-        
-          <v-text-field
-            label="username"
-            type="text"
-           
-            v-model="enteredUsername"
-            required
-          />
 
-          <v-text-field
-            label="password"
-            type="password"
-          
-            v-model="enteredPassword"
-            required
-          />
-       
-       
-        <v-btn class="blue darken-2 white--text" type="submit">
+        <v-text-field
+          label="username"
+          type="text"
+          v-model="enteredUsername"
+          required
+        />
+
+        <v-text-field
+          label="password"
+          type="password"
+          v-model="enteredPassword"
+          required
+        />
+
+        <v-btn
+          class="blue darken-2 white--text"
+          type="submit"
+          :loading="isLoading"
+        >
           {{ isSigninMode ? 'Login' : 'Signup' }}
         </v-btn>
         <a type="button" @click="switchMode"
@@ -44,6 +45,7 @@ export default Vue.extend({
       enteredUsername: '',
       enteredPassword: '',
       isSigninMode: true,
+      isLoading: false,
       switchFromSignup: true,
 
       usernameRules: [
@@ -55,12 +57,12 @@ export default Vue.extend({
         (v: any) => !!v || 'Password is required',
         (v: any) => v.length >= 3 || 'Password must be more than 3 characters',
       ],
-
     }
   },
 
   methods: {
     async onSubmit() {
+      this.isLoading = true
       const userData: User = {
         username: this.enteredUsername,
         password: this.enteredPassword,
@@ -79,15 +81,19 @@ export default Vue.extend({
         } catch (error) {
           console.log(error)
           this.$toast.error('Username or Password is wrong')
+          this.isLoading = false
         }
       } else {
         try {
           await this.$auth.signup(userData)
           this.switchMode()
-          this.enteredPassword = ""
-          this.enteredUsername = ""
+          this.enteredPassword = ''
+          this.enteredUsername = ''
+          this.isLoading = false
+
         } catch (error) {
           this.$toast.error('Please try with difrent Username.')
+          this.isLoading = false
         }
       }
     },

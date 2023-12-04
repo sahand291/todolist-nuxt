@@ -81,7 +81,6 @@ class TodoApi {
 
       return newTodo
     } catch (error) {
-      console.log('dsfsdfs')
       throw new Error('failed to add todo')
     }
   }
