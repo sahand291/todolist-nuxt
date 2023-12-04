@@ -108,8 +108,8 @@ class TodoApi {
     todoId: string,
     todo: { title: string; description: string }
   ) {
-    const repositoryApi = new Api(`todolist/updateTodo/${listId}/${todoId}`)
-
+    const repositoryApi = new Api(`users/todo/${listId}/${todoId}`)
+    
     return repositoryApi.patch(todo)
   }
 
